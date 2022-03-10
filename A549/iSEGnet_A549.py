@@ -197,7 +197,8 @@ for i in range(All_data.shape[0]):
                          baselines=None,
                          target=None)
     attributions.append(explanation.attributions)
-    
+
+epi_imp = [ attributions[i][0][0] for i in range(len(attributions))]
 h5f = h5py.File('./A549/Data/h5file/epi_imp_DE.h5', 'w')
 h5f.create_dataset('dataset_1', data=np.array(epi_imp))
 h5f.close()
