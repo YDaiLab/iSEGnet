@@ -23,12 +23,12 @@ kernal_size = int(sys.argv[2])
 L2 = float(sys.argv[3])
 drop_rate = float(sys.argv[4])
 
-h5d_file_path = "/Shang_PHD/Shang/Shang/July_2021/A549/Model/region_promoter_500_500/Model/model_regression.h5"
-label_data = pd.read_csv("/Shang_PHD/Shang/Shang/July_2021/A549/Data/A549_RNAseq_regression.txt", delimiter="\t")
-with h5py.File('/Shang_PHD/Shang/Shang/July_2021/A549/Data/h5file/epi_data.h5', 'r') as hf:
+h5d_file_path = "./A549/Model/model_regression.h5"
+label_data = pd.read_csv("./A549/Data/A549_RNAseq_regression.txt", delimiter="\t")
+with h5py.File('./A549/Data/h5file/epi_data.h5', 'r') as hf:
     epigenetics_input_data = hf['dataset_1'][:]
 
-with h5py.File('/Shang_PHD/Shang/Shang/July_2021/A549/Data/h5file/seq_data.h5', 'r') as hf:
+with h5py.File('./A549/Data/h5file/seq_data.h5', 'r') as hf:
     sequence_input_data = hf['dataset_1'][:]
     
 label_data = label_data.values
@@ -51,7 +51,7 @@ sequence_input_data = sequence_input_data[:, seq_index]
 All_data = np.concatenate((epigenetics_input_data, sequence_input_data), axis = 1)
 All_data = np.concatenate((All_data, label_data), axis = 1)
 
-random_oder_path = "/Shang_PHD/Shang/Shang/July_2021/A549/Model/random_order_path.txt"
+random_oder_path = "./A549/Model/random_order_path.txt"
 
 if os.path.isfile(random_oder_path):
     random_order = pd.read_csv(random_oder_path, delimiter="\t", header = None)[0].values.tolist()
@@ -166,7 +166,7 @@ expression_gene_prediction = model.predict(x = [test_data_epi, test_data_seq])
 
 R2_value = [r2_score(test_data_label, expression_gene_prediction)]
 
-f=open('/Shang_PHD/Shang/Shang/July_2021/A549/Model/promoter_hypersearching_value.txt','a')
+f=open('./A549/Model/promoter_hypersearching_value.txt','a')
 np.savetxt(f, R2_value, fmt='%1.5f', newline=", ")
 f.write("\n")
 f.close()
@@ -175,7 +175,7 @@ import scipy.stats
 
 pearson = [scipy.stats.pearsonr(test_data_label.flatten(), expression_gene_prediction.flatten())]
 
-f=open('/Shang_PHD/Shang/Shang/July_2021/A549/Model/promoter_hypersearching_value.txt','a')
+f=open('./A549/Model/promoter_hypersearching_value.txt','a')
 np.savetxt(f, pearson[0], fmt='%1.5f', newline=", ")
 f.write("\n")
 f.close()
