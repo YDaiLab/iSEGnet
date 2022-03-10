@@ -180,3 +180,21 @@ np.savetxt(f, pearson[0], fmt='%1.5f', newline=", ")
 f.write("\n")
 f.close()
 
+model.load_weights(h5d_file_path)
+
+from alibi.explainers import IntegratedGradients
+
+ig  = IntegratedGradients(model,
+                          layer=None,
+                          method="gausslegendre",
+                          n_steps=200,
+                          internal_batch_size=1)
+
+
+attributions = []
+for i in range(All_data.shape[0]):
+    explanation = ig.explain([All_data[i:(i+1), 0:2500], All_data[i:(i+1), 2500:12500]],
+                         baselines=None,
+                         target=None)
+    attributions.append(explanation.attributions)
+    
