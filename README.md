@@ -6,6 +6,6 @@ Gene  expression is  regulated  at transcriptionaland  post-transcriptionallevel
 
 ![image](iSERGnet_graphic_abstract.png "iSEGnet graphic abstract")
 
-If you are interesting on using our model, please go through the tutorial in the jupyter notebook iSEGnet_tutorial.ipynb. 
+If you are interesting on using our model, please go through the tutorial in the jupyter notebook [here](https://github.com/YDaiLab/iSEGnet/blob/main/iSEGnet_tutorial.ipynb).
 
 If you have any questions, feel free to email yangdai@uic.edu for more information.
